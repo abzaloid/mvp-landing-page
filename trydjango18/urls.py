@@ -6,6 +6,9 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^$', 'newsletter.views.home', name='home'),
     url(r'^contact/$', 'newsletter.views.contact', name='contact'),
+    url(r'^crime/$', 'newsletter.views.crime', name='crime'),
+    url(r'^dtp/$', 'newsletter.views.dtp', name='dtp'),
+    url(r'^olimpkz/$', 'newsletter.views.olimpkz', name='olimpkz'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 if settings.DEBUG:

@@ -8,6 +8,15 @@ from django.utils.translation import ugettext as _
 
 from .forms import SignUpForm, ContactForm
 
+def crime(request):
+	return render(request, "home.html", {})
+
+def olimpkz(request):
+	return render(request, "home.html", {})
+
+def dtp(request):
+	return render(request, "home.html", {})
+
 def home(request):
 	title = _('Check our updates')
 	subscribe = _('Subscribe')
