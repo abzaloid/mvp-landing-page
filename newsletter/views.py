@@ -251,9 +251,7 @@ def home(request):
 		instance.full_name = full_name
 
 		instance.save()
-		context = {
-			"title": u"Спасибо!",
-		}
+		context['sps'] = u'Спасибо!'
 		print instance.email
 
 	return render(request, "home.html", context)
