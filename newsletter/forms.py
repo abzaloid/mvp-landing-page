@@ -25,7 +25,7 @@ class SignUpForm(forms.ModelForm):
 		self.fields['full_name'].label = u"Полное имя"
 
 	def clean_email(self):
-		# email = self.cleaned_data.get('email')
+		email = self.cleaned_data.get('email')
 		# email_base, provider = email.split('@')
 		# domain, extension = provider.split('.')
 		# if not extension == 'edu':
