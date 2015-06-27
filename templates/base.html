@@ -14,7 +14,8 @@
 
     {% include 'head_css.html' %}
     <style>
-      {% block style %}{% endblock %}
+      {% block style %}
+      {% endblock %}
     </style>
 
 
@@ -24,19 +25,33 @@
 
   {% include 'navbar.html' %}
 
+    <div class="container-fluid">
+    <style>
+        .container-fluid{
+          padding-right: 0px;
+          padding-left: 0px;
+        }
 
-
-    <div class="container">
+    </style>
 
       {% block jumbotron %}
       {% endblock %}
+    </div>
 
+    <div class="container">
       {% block content %}
       {% endblock %}
     </div> <!-- /container -->
 
+    <div class="container-fluid">
+    {% block content_fluid %}
+    {% endblock %}
+    </div>
 
-
+    <div class="container">
+    {% block disqus %}
+    {% endblock %}
+    </div>
     <footer class="footer">
       <div class="container">
         <p class="text-muted text-align-center"><a href='http://kz.linkedin.com/in/abzalserekov'>Абзал Сереков</a>. <a href='http://atta.kz'>Atta Studios</a> </p>
@@ -44,6 +59,6 @@
       </div>
     </footer>
     {% include 'javascript.html' %}
-
+    {% block js %} {% endblock %}
   </body>
 </html>

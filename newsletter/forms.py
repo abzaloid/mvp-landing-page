@@ -12,8 +12,8 @@ class ContactForm(forms.Form):
 	message = forms.CharField(widget=forms.Textarea)
 	def __init__(self, *a, **kw):
 		super(ContactForm, self).__init__(*a, **kw)
-		self.fields['full_name'].label = _("Full name")
-		self.fields['message'].label = _("Message")
+		self.fields['full_name'].label = u"Полное имя"
+		self.fields['message'].label = u"Сообщение"
 
 
 class SignUpForm(forms.ModelForm):
@@ -22,7 +22,7 @@ class SignUpForm(forms.ModelForm):
 		fields = ['full_name', 'email']
 	def __init__(self, *a, **kw):
 		super(SignUpForm, self).__init__(*a, **kw)
-		self.fields['full_name'].label = _("Full name")
+		self.fields['full_name'].label = u"Полное имя"
 
 	def clean_email(self):
 		# email = self.cleaned_data.get('email')
@@ -35,5 +35,5 @@ class SignUpForm(forms.ModelForm):
 	def clean_full_name(self):
 		full_name = self.cleaned_data.get('full_name')
 		if len(full_name) == 0:
-			raise forms.ValidationError(_("Please enter your full name."))
+			raise forms.ValidationError(u"Пожалуйста, введите полное имя.")
 		return full_name

@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% block head_title %}Криминальная статистика | {{block.super}} {% endblock %}
+
+<style>
+{% block style %}
+#map-canvas {
+height:600px;
+margin: 0px;
+padding: 0px
+}
+
+.Flexible-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.Flexible-container iframe,   
+.Flexible-container object,  
+.Flexible-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.row-padding {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+{% endblock %}
+</style>
+
+
+{% block content_fluid %}
+
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{% url 'crime' %}">
+                        Казахстан
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'aktau' %}">Актау</a>
+                </li>
+                <li>
+                    <a href="{% url 'aktobe' %}">Актобе</a>
+                </li>
+                <li>
+                    <a href="{% url 'astana' %}">Астана</a>
+                </li>
+                <li>
+                    <a href="{% url 'atyrau' %}">Атырау</a>
+                </li>
+                <li>
+                    <a href="{% url 'karaganda' %}">Караганда</a>
+                </li>
+                <li>
+                    <a href="{% url 'kokshetau' %}">Кокшетау</a>
+                </li>
+                <li>
+                    <a href="{% url 'kostanay' %}">Костанай</a>
+                </li>
+                <li>
+                    <a href="{% url 'kyzylorda' %}">Кызылорда</a>
+                </li>
+                <li>
+                    <a href="{% url 'pavlodar' %}">Павлодар</a>
+                </li>
+                <li>
+                    <a href="{% url 'petropavlovsk' %}">Петропавловск</a>
+                </li>
+                <li>
+                    <a href="{% url 'shymkent' %}">Шымкент</a>
+                </li>
+                <li>
+                    <a href="{% url 'taldykorgan' %}">Талдыкорган</a>
+                </li>
+                <li>
+                    <a href="{% url 'taraz' %}">Тараз</a>
+                </li>
+                <li>
+                    <a href="{% url 'uralsk' %}">Уральск</a>
+                </li>
+                <li>
+                    <a href="{% url 'uskaman' %}">Усть-Каменагорск</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                    {% if "all" in city_name %}
+                        <h1>Криминальная статистика Казахстана</h1>
+                    {% else %}
+                        <h1>Криминальная статистика города {{city_name}}</h1>
+                    {% endif %}
+                        <p><div id="map-canvas"></div></p>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+<script>
+
+var map, pointarray, heatmap;
+
+var taxiData = [
+
+];
+
+var heatMapData = [
+    {% for c in data %}
+        {{ "{location: new google.maps.LatLng("}} {{c.lat|stringformat:"f"}}, {{c.lng|stringformat:"f"}}), weight: {{c.weight|stringformat:"f"}} {{"}"}},
+    {% endfor %}
+];
+
+function initialize() {
+  var mapOptions = {
+    zoom: {{zoom}},
+    center: new google.maps.LatLng({{start_point}}),
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var pointArray = new google.maps.MVCArray(heatMapData);
+
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data: pointArray
+  });
+
+    heatmap.setMap(map);
+    heatmap.set('radius', heatmap.get('radius') ? null : 50);
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+{% endblock %}
+
