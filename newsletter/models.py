@@ -1,6 +1,10 @@
 from django.db import models
 
-# Create your models here.
+class Point(models.Model):
+	lat = models.FloatField()
+	lng = models.FloatField()
+	weight = models.FloatField()
+	city = models.CharField(max_length=30)
 
 class SignUp(models.Model):
 	email = models.EmailField()
@@ -10,3 +14,5 @@ class SignUp(models.Model):
 
 	def __unicode__(self):
 		return self.email
+
+

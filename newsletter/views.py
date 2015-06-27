@@ -7,8 +7,10 @@ from django.utils.translation import ugettext as _
 
 
 from .forms import SignUpForm, ContactForm
+from .getfiles import files
 
 def crime(request):
+	# files = 
 	return render(request, "home.html", {})
 
 def olimpkz(request):
