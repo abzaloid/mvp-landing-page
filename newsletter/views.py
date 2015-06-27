@@ -1,20 +1,27 @@
+# coding=utf-8
+
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render
+from django.utils.translation import ugettext as _
 
 
 from .forms import SignUpForm, ContactForm
 
-# Create your views here.
-
 def home(request):
-	title = 'Welcome'
-
+	title = _('Check our updates')
+	subscribe = _('Subscribe')
 	form = SignUpForm(request.POST or None)
+
+	top_name = u'Статистика KZ'
+	top_text = u'Вы найдете самую разную статистику Казахстана. Например, тепловую карту Казахстана с данными о криминальности и дорожно-транспортных проишевствий(ДТП) городов, правду о букмекерских конторах основанная на реальных данных и многое другое. Следите за нами.'
 
 	context = {
 		'title': title,
 		'form': form,
+		'subscribe': subscribe,
+		'top_text': top_text,
+		'top_name': top_name,
 	}
 	
 	if form.is_valid():
@@ -29,7 +36,7 @@ def home(request):
 
 		instance.save()
 		context = {
-			"title": "Thank you!",
+			"title": _("Thank You!"),
 		}
 		print instance.email
 
@@ -37,7 +44,7 @@ def home(request):
 
 def contact(request):
 	form = ContactForm(request.POST or None)
-	title = 'Contact Us'
+	title = _('Contact Us')
 	title_align_center = True
 	if form.is_valid():
 		form_email = form.cleaned_data.get("email")
@@ -63,6 +70,7 @@ def contact(request):
 		'form': form,
 		'title': title,
 		'title_align_center': title_align_center,
+		'signup': _('Sign Up'),
 	}
 
 	return render(request, "form.html", context)

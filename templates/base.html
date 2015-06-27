@@ -1,16 +1,16 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <meta name="author" content="Abzal Serekov">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <title>{% block head_title %}MVP Landing{% endblock %}</title>
+    <title>{% block head_title %}STAT.KZ{% endblock %}</title>
 
     {% include 'head_css.html' %}
     <style>
@@ -35,6 +35,14 @@
       {% endblock %}
     </div> <!-- /container -->
 
+
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted text-align-center"><a href='http://kz.linkedin.com/in/abzalserekov'>Абзал Сереков</a>. <a href='http://atta.kz'>Atta Studios</a> </p>
+        <p class="text-muted text-align-center">abzal.serekov@gmail.com </p>
+      </div>
+    </footer>
     {% include 'javascript.html' %}
 
   </body>
