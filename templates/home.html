@@ -30,7 +30,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-sm-3 pull-right">
-		<p class='lead text-align-center'>{{title}}</p>
+		<p class='lead text-align-center'>{% if sps %}{{sps}}{% else %}{{title}}{% endif %}</p>
 		<form method='POST' action=''>{% csrf_token %}
 			{{form|crispy}}	
 			<input class='btn btn-primary' type='submit' value='{{subscribe}}'>
